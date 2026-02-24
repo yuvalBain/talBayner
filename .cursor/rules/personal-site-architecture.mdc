@@ -1,0 +1,90 @@
+---
+description: Personal site – architecture, SEO, and component rules
+alwaysApply: true
+---
+
+# Personal Site – Architecture
+
+## Goals
+- Build by design (Figma/etc.): do not change colors, fonts, or spacing unless asked.
+- Skeleton first; add functionality only when requested (forms, API, CMS, etc.).
+- Next.js App Router, TypeScript strict, Tailwind. Deploy on Vercel.
+
+## Structure
+- **app/** – layout.tsx (minimal), page.tsx, (routes)/ for multi-page. No (store)/(dashboard)/api until requested.
+- **components/ui/** – globals.css (design tokens: light/dark palette, spacing). No business logic in UI.
+- **components/layout/** – Navbar, Footer, ThemeProvider. Keep layout minimal.
+- **components/sections/** – section components; empty until design provided.
+- **components/** – use arrow functions for components, export from index.ts. Do not use default exports for those components.
+  const func : React.FC<funcProps>= ()=>{} - also do not forget type script for those funcProps defined as type funcProps = HtmlAttributes<HTMLDivElement>  the HTMLDivElement  define by the first container of the components if its div use diveElement
+   if button so use buttonElement and so on. Also do not forget to add the props.children to the funcProps type if you want to use it in the component.
+   and this is example of how to use it in the component:
+    const func : React.FC<funcProps>= ({children,...props}) => {
+     return (
+          <div {...props}>
+                {children}
+          </div>
+     )
+    }
+- **components/** – use React.FC type include imports if arrow functions is the main function or using React attributes (e.g. props.children). Otherwise, use regular function with explicit return type.
+- **hooks/** – custom hooks when needed.
+- **lib/** – utilities (e.g. cn). **constants/** – site config, routes. **types/** – shared types.
+
+
+## SEO (every page)
+- Each page exports `metadata`: title, description. Use template for title when needed.
+- Use semantic HTML, one H1 per page, aria-labels where needed. Images: next/image; prefer WebP. Video: WebM when added.
+
+## Styling
+- Use design tokens from `components/ui/globals.css`. Do not introduce new colors/fonts without design.
+- Dark mode: Tailwind class strategy (`.dark`). Theme toggle in Navbar. Refine when dark design is provided.
+
+## i18n
+- Hebrew only: `lang="he"`, `dir="rtl"` in root layout.
+
+## Later (do not build until said)
+- Admin dashboard, auth, blog logic, contact form backend, CRM, payments (Stripe), protected content.
+
+## You dont create any SVG components until the design is provided. When you do, use next/image for optimization and accessibility.
+- In case you dont have any SVg to use , create small div with the word (implement as css selector after and absolute) of the icon.
+
+## We only using pnpm and not npm
+
+
+# Design tokens (semantic Tailwind)
+
+Tokens are defined in `src/lib/styles/globals.css` and exposed via `tailwind.config.js` and `@theme inline`.
+
+## Groups
+
+| Group        | Use |
+|-------------|-----|
+| **base**    | Page and content (main background, body text, default borders). |
+| **baseInverse** | Inverted base (e.g. dark strip on light page). |
+| **brand**   | Teal accent (CTAs, links, focus rings). |
+| **info**    | Informational state (alerts, badges). |
+| **negative** | Error/destructive state. |
+| **positive** | Success state. |
+| **warning** | Warning state. |
+| **nav**     | Navbar only (bar bg, input, divider, link colors). |
+
+## Slots
+
+- **Background**: `primary`, `secondary`, `tertiary` (e.g. `bg-base-primary`, `bg-brand-primary`).
+- **Border**: `default`, `subtle`, `accent` for base/baseInverse; `subtle`, `accent` for brand/info/negative/positive/warning (e.g. `border-base-default`, `border-brand-accent`).
+- **Text**: `primary`, `secondary`, `tertiary`, `onColor` (e.g. `text-base-primary`, `text-base-onColor`).
+- **Nav**: `primary`, `input`, `divider` (bg/border); `link`, `link-hover`, `link-active` (text/border).
+
+## Examples
+
+- Page background: `bg-background` or `bg-base-primary`
+- Body text: `text-foreground` or `text-base-primary`
+- Muted text: `text-muted-foreground` or `text-base-secondary`
+- Navbar: `bg-nav-primary`, `border-nav-primary`, `text-nav-link`, `ring-offset-nav-primary`
+- CTA / brand: `bg-primary`, `text-primary`, `border-brand-accent`, `ring-primary`
+
+## Legacy aliases
+
+These remain for existing components; prefer semantic classes when adding new UI:
+
+- `background`, `foreground`, `primary`, `secondary`, `muted`, `muted-foreground`, `border`, `ring`
