@@ -1,0 +1,348 @@
+@import "./palette.css";
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+@custom-variant dark (&:is([data-theme="dark"] *));
+
+@layer base{
+  :root {
+    --border-base-accent: var(--gray-600);
+    --border-base-default: var(--gray-200);
+    --text-base-onColor: var(--white);
+
+    --bg-base-primary: var(--white);
+    --bg-accent-primary: var(--color-indigo-400);
+
+    --surface-base-primary: var(--white);
+    --text-base-primary: var(--gray-900);
+    --bg-base-secondary: var(--gray-100);
+
+    --surface-base-secondary: var(--gray-100);
+    --text-base-secondary: var(--gray-600);
+    --border-base-subtle: var(--gray-100);
+
+
+    --bg-base-tertiary: var(--gray-200);
+    --surface-base-tertiary: var(--gray-200);
+
+    --text-base-tertiary: var(--gray-400);
+    --border-baseInverse-accent: var(--gray-50);
+    --border-baseInverse-default: var(--gray-400);
+    --text-baseInverse-onColor: var(--black);
+    --bg-baseInverse-primary: var(--gray-900);
+    --text-baseInverse-primary: var(--gray-50);
+    --bg-baseInverse-secondary: var(--gray-600);
+    --text-baseInverse-secondary: var(--gray-400);
+
+
+    --border-baseInverse-subtle: var(--gray-200);
+    --bg-baseInverse-tertiary: var(--gray-400);
+    --text-baseInverse-tertiary: var(--gray-200);
+
+    --border-brand-accent: var(--teal-500);
+    --bg-brand-primary: var(--teal-500);
+    --text-brand-primary: var(--teal-600);
+
+    --bg-brand-secondary: var(--teal-400);
+    --text-brand-secondary: var(--teal-500);
+    --border-brand-subtle: var(--gray-200);
+
+    --bg-brand-tertiary: var(--teal-600);
+    --text-brand-tertiary: var(--teal-400);
+    --border-info-accent: var(--gray-600);
+    --bg-info-primary: var(--gray-100);
+    --text-info-primary: var(--gray-900);
+    --bg-info-secondary: var(--gray-200);
+    --text-info-secondary: var(--gray-600);
+    --border-info-subtle: var(--gray-200);
+    --bg-info-tertiary: var(--gray-400);
+    --text-info-tertiary: var(--gray-400);
+    --comp-link-text-default: var(--gray-600);
+    --comp-link-text-hover: var(--teal-500);
+
+    --comp-link-text-visited: var(--gray-900);
+    --border-negative-accent: var(--gray-600);
+    --bg-negative-primary: var(--gray-100);
+    --text-negative-primary: var(--gray-900);
+
+    --bg-negative-secondary: var(--gray-200);
+    --text-negative-secondary: var(--gray-600);
+    --border-negative-subtle: var(--gray-200);
+    --bg-negative-tertiary: var(--gray-400);
+
+    --text-negative-tertiary: var(--gray-400);
+    --comp-page-bg: var(--white);
+    --border-positive-accent: var(--gray-600);
+
+    --bg-positive-primary: var(--gray-100);
+    --text-positive-primary: var(--gray-900);
+    --bg-positive-secondary: var(--gray-200);
+    --text-positive-secondary: var(--gray-600);
+    --border-positive-subtle: var(--gray-200);
+    --bg-positive-tertiary: var(--gray-400);
+    --text-positive-tertiary: var(--gray-400);
+    --border-warning-accent: var(--gray-600);
+    --bg-warning-primary: var(--red-400);
+    --text-warning-primary: var(--gray-900);
+    --bg-warning-secondary: var(--gray-200);
+    --text-warning-secondary: var(--gray-600);
+
+    --border-warning-subtle: var(--gray-200);
+    --bg-warning-tertiary: var(--gray-400);
+    --text-warning-tertiary: var(--gray-400);
+  }
+
+  :root[data-theme="dark"] {
+    --border-base-accent: var(--gray-100);
+    --border-base-default: var(--gray-600);
+    --text-base-onColor: var(--black);
+
+    --bg-base-primary: var(--gray-900);
+
+    --surface-base-primary: var(--gray-900);
+    --text-base-primary: var(--gray-50);
+    --bg-base-secondary: var(--gray-600);
+    --bg-accent-primary: var(--color-indigo-500);
+
+    --surface-base-secondary: var(--gray-600);
+    --text-base-secondary: var(--gray-400);
+    --border-base-subtle: var(--gray-400);
+
+    --bg-base-tertiary: var(--gray-400);
+    --surface-base-tertiary: var(--gray-400);
+
+    --text-base-tertiary: var(--gray-200);
+    --border-baseInverse-accent: var(--gray-900);
+    --border-baseInverse-default: var(--gray-200);
+    --text-baseInverse-onColor: var(--white);
+    --bg-baseInverse-primary: var(--gray-50);
+    --text-baseInverse-primary: var(--gray-900);
+    --bg-baseInverse-secondary: var(--gray-200);
+    --text-baseInverse-secondary: var(--gray-600);
+
+    --border-baseInverse-subtle: var(--gray-400);
+    --bg-baseInverse-tertiary: var(--gray-400);
+    --text-baseInverse-tertiary: var(--gray-400);
+
+    --border-brand-accent: var(--teal-400);
+    --bg-brand-primary: var(--teal-400);
+    --text-brand-primary: var(--teal-400);
+
+    --bg-brand-secondary: var(--teal-500);
+    --text-brand-secondary: var(--teal-500);
+    --border-brand-subtle: var(--gray-600);
+
+    --bg-brand-tertiary: var(--teal-600);
+    --text-brand-tertiary: var(--teal-600);
+    --border-info-accent: var(--gray-400);
+    --bg-info-primary: var(--gray-600);
+    --text-info-primary: var(--gray-50);
+    --bg-info-secondary: var(--gray-400);
+    --text-info-secondary: var(--gray-400);
+    --border-info-subtle: var(--gray-600);
+    --bg-info-tertiary: var(--gray-200);
+    --text-info-tertiary: var(--gray-200);
+    --comp-link-text-default: var(--gray-400);
+    --comp-link-text-hover: var(--teal-400);
+
+    --comp-link-text-visited: var(--gray-100);
+    --border-negative-accent: var(--gray-400);
+    --bg-negative-primary: var(--gray-600);
+    --text-negative-primary: var(--gray-50);
+
+    --bg-negative-secondary: var(--gray-400);
+    --text-negative-secondary: var(--gray-400);
+    --border-negative-subtle: var(--gray-600);
+    --bg-negative-tertiary: var(--gray-200);
+
+    --text-negative-tertiary: var(--gray-200);
+    --comp-page-bg: var(--gray-900);
+    --border-positive-accent: var(--gray-400);
+
+    --bg-positive-primary: var(--gray-600);
+    --text-positive-primary: var(--gray-50);
+    --bg-positive-secondary: var(--gray-400);
+    --text-positive-secondary: var(--gray-400);
+    --border-positive-subtle: var(--gray-600);
+    --bg-positive-tertiary: var(--gray-200);
+    --text-positive-tertiary: var(--gray-200);
+    --border-warning-accent: var(--gray-400);
+    --bg-warning-primary: var(--red-600);
+    --text-warning-primary: var(--gray-50);
+    --bg-warning-secondary: var(--gray-400);
+    --text-warning-secondary: var(--gray-400);
+
+    --border-warning-subtle: var(--gray-600);
+    --bg-warning-tertiary: var(--gray-200);
+    --text-warning-tertiary: var(--gray-200);
+  }
+
+  :root {
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-10: 2.5rem;
+    --space-11: 2.75rem;
+    --space-12: 3rem;
+    --space-13: 3.25rem;
+    --space-14: 3.5rem;
+    --space-15: 3.75rem;
+    --space-16: 4rem;
+    --space-17: 4.25rem;
+    --space-18: 4.5rem;
+    --space-19: 4.75rem;
+    --space-2: 0.55rem;
+    --space-20: 5rem;
+    --space-21: 5.25rem;
+    --space-22: 5.5rem;
+    --space-23: 5.75rem;
+    --space-24: 6rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 1.75rem;
+    --space-8: 2rem;
+    --space-9: 2.25rem;
+  }
+
+  :root {
+    --background: var(--comp-page-bg);
+    --border: var(--border-base-default);
+    --foreground: var(--text-base-primary);
+    --muted: var(--bg-base-secondary);
+    --primary: var(--teal-500);
+    --ring: var(--border-base-accent);
+    --secondary: var(--bg-base-secondary);
+    --navbar-bg: var(--bg-base-primary);
+    --navbar-border: var(--border-base-default);
+    --navbar-cta-radius: 8px;
+    --navbar-divider: var(--border-base-default);
+    --muted-foreground: var(--text-base-secondary);
+    --primary-foreground: var(--text-base-onColor);
+    --secondary-foreground: var(--text-base-primary);
+    --navbar-height: 72px;
+    --navbar-input-bg: var(--bg-base-secondary);
+    --navbar-input-border: var(--border-base-default);
+    --nav-link-active-border: var(--gray-900);
+    --nav-link-color: var(--comp-link-text-default);
+    --nav-link-hover: var(--comp-link-text-hover);
+    --background-primary: var(--bg-base-primary);
+    --border-primary: var(--border-base-default);
+    --card-primary: var(--surface-base-secondary);
+    --foreground-primary: var(--text-base-primary);
+    --input-primary: var(--bg-base-secondary);
+    --ring-primary: var(--border-base-accent);
+    --background-secondary: var(--bg-base-secondary);
+    --border-secondary: var(--border-base-accent);
+    --ring-secondary: var(--border-base-subtle);
+    --navbar-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  :root[data-theme="dark"] {
+    --nav-link-active-border: var(--gray-100);
+    --nav-link-color: var(--comp-link-text-default);
+    --nav-link-hover: var(--comp-link-text-hover);
+    --navbar-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* =============================================================================
+   Tailwind v4 @theme – utility-specific vars so class names stay short.
+   --background-color-* → bg-*, --text-color-* → text-*, --border-color-* → border-*
+   ============================================================================= */
+@theme inline {
+  /* Base: backgrounds → bg-base-primary, etc. */
+  --background-color-base-primary: var(--bg-base-primary);
+  --background-color-base-secondary: var(--bg-base-secondary);
+  --background-color-base-tertiary: var(--bg-base-tertiary);
+  --background-color-accent-primary: var(--bg-accent-primary);
+  --text-color-base-primary: var(--text-base-primary);
+  --text-color-base-secondary: var(--text-base-secondary);
+  --text-color-base-tertiary: var(--text-base-tertiary);
+  --text-color-base-onColor: var(--text-base-onColor);
+  --border-color-base-default: var(--border-base-default);
+  --border-color-base-subtle: var(--border-base-subtle);
+  --border-color-base-accent: var(--border-base-accent);
+  --background-color-surface-base-primary: var(--surface-base-primary);
+  --background-color-surface-base-secondary: var(--surface-base-secondary);
+  --background-color-surface-base-tertiary: var(--surface-base-tertiary);
+  /* Base inverse */
+  --background-color-baseInverse-primary: var(--bg-baseInverse-primary);
+  --background-color-baseInverse-secondary: var(--bg-baseInverse-secondary);
+  --background-color-baseInverse-tertiary: var(--bg-baseInverse-tertiary);
+  --text-color-baseInverse-primary: var(--text-baseInverse-primary);
+  --text-color-baseInverse-secondary: var(--text-baseInverse-secondary);
+  --text-color-baseInverse-tertiary: var(--text-baseInverse-tertiary);
+  --text-color-baseInverse-onColor: var(--text-baseInverse-onColor);
+  --border-color-baseInverse-default: var(--border-baseInverse-default);
+  --border-color-baseInverse-subtle: var(--border-baseInverse-subtle);
+  --border-color-baseInverse-accent: var(--border-baseInverse-accent);
+  /* Brand */
+  --background-color-brand-primary: var(--bg-brand-primary);
+  --background-color-brand-secondary: var(--bg-brand-secondary);
+  --background-color-brand-tertiary: var(--bg-brand-tertiary);
+  --text-color-brand-primary: var(--text-brand-primary);
+  --text-color-brand-secondary: var(--text-brand-secondary);
+  --text-color-brand-tertiary: var(--text-brand-tertiary);
+  --border-color-brand-accent: var(--border-brand-accent);
+  --border-color-brand-subtle: var(--border-brand-subtle);
+  /* Info, negative, positive, warning */
+  --background-color-info-primary: var(--bg-info-primary);
+  --background-color-negative-primary: var(--bg-negative-primary);
+  --background-color-positive-primary: var(--bg-positive-primary);
+  --background-color-warning-primary: var(--bg-warning-primary);
+  --text-color-info-primary: var(--text-info-primary);
+  --text-color-negative-primary: var(--text-negative-primary);
+  --text-color-positive-primary: var(--text-positive-primary);
+  --text-color-warning-primary: var(--text-warning-primary);
+  --border-color-info-accent: var(--border-info-accent);
+  --border-color-negative-accent: var(--border-negative-accent);
+  --border-color-positive-accent: var(--border-positive-accent);
+  --border-color-warning-accent: var(--border-warning-accent);
+  /* Page & links */
+  --background-color-comp-page-bg: var(--comp-page-bg);
+  --text-color-comp-link-text-default: var(--comp-link-text-default);
+  --text-color-comp-link-text-hover: var(--comp-link-text-hover);
+  --text-color-comp-link-text-visited: var(--comp-link-text-visited);
+  /* Nav */
+  --background-color-nav-primary: var(--navbar-bg);
+  --background-color-nav-input: var(--navbar-input-bg);
+  --border-color-nav-divider: var(--navbar-divider);
+  --text-color-nav-link: var(--nav-link-color);
+  --text-color-nav-link-hover: var(--nav-link-hover);
+  --border-color-nav-link-active: var(--nav-link-active-border);
+  /* Legacy (single color for bg/text/border) */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+}
+
+
+body {
+  background: var(--comp-page-bg);
+  color: var(--text-base-primary);
+  font-family: var(--font-geist-sans, var(--font-sans, ui-sans-serif, system-ui, sans-serif));
+}
+
+
+@layer base {
+  button:not(:disabled) {
+    @apply cursor-pointer;
+  }
+  a:not([aria-disabled="true"]) {
+    @apply cursor-pointer;
+  }
+  input:disabled {
+    @apply cursor-default;
+  }
+  [role="button"]:not([aria-disabled="true"]) {
+    @apply cursor-pointer;
+  }
+  svg {
+    /*fill: currentColor;*/
+  }
+}

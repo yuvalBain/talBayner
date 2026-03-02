@@ -1,0 +1,26 @@
+/**
+ * Base palette – raw colors only. No semantic tokens.
+ * Semantic tokens live in globals.css.
+ */
+:root {
+  /* Whites / Blacks */
+  --black: #000000;
+  --white: #ffffff;
+
+  --gray-100: #ededed;
+  --gray-200: #d9d9d9;
+  --gray-400: #888888;
+  --red-400: #a00606;
+  --teal-400: #1fb5a8;
+  --gray-50: #f4f4f4;
+  --teal-500: #169c90;
+  --gray-600: #555555;
+
+  /* Primary color scale (teal) */
+  --red-600: #5b0505;
+  --teal-600: #149488;
+  --gray-900: #1a1a1a;
+
+
+  /* Primary color scale (red) */
+}
