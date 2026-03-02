@@ -50,40 +50,15 @@ export default async function RootLayout({
 
   return (
     <html lang="he" dir="rtl" data-theme={theme}>
-      <head title="hello">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-  (function() {
-    try {
-      var cookiePair = document.cookie
-        .split(";")
-        .map(function (part) { return part.trim(); })
-        .find(function (part) { return part.indexOf("theme=") === 0; });
-
-      var value = "light";
-      if (cookiePair) {
-        var raw = decodeURIComponent(cookiePair.split("=", 2)[1] || "");
-        if (raw === "light" || raw === "dark") {
-          value = raw;
-        }
-      }
-
-      document.documentElement.setAttribute("data-theme", value);
-    } catch (e) {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-  })();
-            `,
-          }}
-        />
-        <title></title>
+      <head>
+        <title>TODO</title>
       </head>
       <body className={`min-h-screen antialiased `}>
         <ThemeProvider themeIn={theme}>
           <TopLoaderProvider>
             <div className="flex min-h-screen flex-col">
               <Navbar />
+
               <main
                 className="flex-1 bg-background px-4"
                 id="main-content"
@@ -91,6 +66,7 @@ export default async function RootLayout({
               >
                 {children}
               </main>
+
               <Footer />
             </div>
           </TopLoaderProvider>

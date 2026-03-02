@@ -25,8 +25,15 @@ export function ThemeProvider({
   const [theme, setThemeState] = useState<Theme>(themeIn);
 
   const toggleTheme = () => {
+    //get and set for the app
     const nextTheme = theme === "light" ? "dark" : "light";
     setThemeState(nextTheme);
+
+    //get and set for the html element
+    const root = document.documentElement;
+    root.setAttribute("data-theme", nextTheme);
+
+    // set for the cookies
     setCookies({ STORAGE_KEY: "theme", value: nextTheme });
   };
 
