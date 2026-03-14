@@ -1,34 +1,35 @@
 {
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "lib": ["DOM", "dom.iterable", "ESNext"],
-    "allowJs": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./*"],
-      "@/components/*": ["./components/*"],
-      "@/styles/*": ["./lib/styles/*"],
-      "@/assets/*": ["./assets/*"],
-      "@/constants/*": ["./constants/*"],
-      "@/ui/*": ["./components/ui/*"]
-    }
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts",
-    "storybook",
-    ".storybook"
-  ],
-  "exclude": ["node_modules"]
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["DOM", "dom.iterable", "ESNext"],
+		"moduleResolution": "bundler",
+		"allowJs": true,
+		"jsx": "react-jsx",
+		"baseUrl": ".",
+		"incremental": true,
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"paths": {
+			"@/*": ["./*"],
+			"@/components/*": ["./components/*"],
+			"@/styles/*": ["./lib/styles/*"],
+			"@/assets/*": ["./assets/*"],
+			"@/constants/*": ["./constants/*"],
+			"@/ui/*": ["./components/ui/*"]
+		}
+	},
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		".next/dev/types/**/*.ts",
+		"**/*.mts",
+		"storybook",
+		".storybook"
+	],
+	"exclude": ["node_modules"]
 }
