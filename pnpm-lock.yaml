@@ -42,6 +42,9 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
+      '@biomejs/biome':
+        specifier: ^2.4.7
+        version: 2.4.7
       '@eslint/css':
         specifier: ^0.14.1
         version: 0.14.1
@@ -170,9 +173,6 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
-      '@biomejs/biome':
-        specifier: ^2.4.7
-        version: 2.4.7
       '@eslint/css':
         specifier: ^0.14.1
         version: 0.14.1
@@ -241,7 +241,7 @@ importers:
         version: 2.6.1
       storybook:
         specifier: 8.6.15
-        version: 8.6.15(prettier@3.8.1)
+        version: 8.6.15
       tailwindcss:
         specifier: ^4.2.0
         version: 4.2.0
@@ -2608,33 +2608,6 @@ packages:
       ts-dedent: 2.2.0
     dev: true
 
-  /@storybook/core@8.6.15(prettier@3.8.1)(storybook@8.6.15):
-    resolution: {integrity: sha512-VFpKcphNurJpSC4fpUfKL3GTXVoL53oytghGR30QIw5jKWwaT50HVbTyb41BLOUuZjmMhUQA8weiQEew6RX0gw==}
-    peerDependencies:
-      prettier: ^2 || ^3
-    peerDependenciesMeta:
-      prettier:
-        optional: true
-    dependencies:
-      '@storybook/theming': 8.6.15(storybook@8.6.15)
-      better-opn: 3.0.2
-      browser-assert: 1.2.1
-      esbuild: 0.25.12
-      esbuild-register: 3.6.0(esbuild@0.25.12)
-      jsdoc-type-pratt-parser: 4.8.0
-      prettier: 3.8.1
-      process: 0.11.10
-      recast: 0.23.11
-      semver: 7.7.4
-      util: 0.12.5
-      ws: 8.19.0
-    transitivePeerDependencies:
-      - bufferutil
-      - storybook
-      - supports-color
-      - utf-8-validate
-    dev: true
-
   /@storybook/core@8.6.15(storybook@8.6.15):
     resolution: {integrity: sha512-VFpKcphNurJpSC4fpUfKL3GTXVoL53oytghGR30QIw5jKWwaT50HVbTyb41BLOUuZjmMhUQA8weiQEew6RX0gw==}
     peerDependencies:
@@ -2775,7 +2748,7 @@ packages:
     dependencies:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
-      storybook: 8.6.15(prettier@3.8.1)
+      storybook: 8.6.15
     dev: true
 
   /@storybook/react-dom-shim@8.6.15(react-dom@19.2.3)(react@19.2.3)(storybook@8.6.15):
@@ -2835,7 +2808,7 @@ packages:
       react: 19.2.3
       react-docgen: 8.0.2
       react-dom: 19.2.3(react@19.2.3)
-      storybook: 8.6.15(prettier@3.8.1)
+      storybook: 8.6.15
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
@@ -7761,12 +7734,6 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier@3.8.1:
-    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dev: true
-
   /pretty-error@4.0.0:
     resolution: {integrity: sha512-AoJ5YMAcXKYxKhuJGdcvse+Voc6v1RgnsR3nWcYU7q4t6z0Q6T86sv5Zq8VIRbOWWFpvdGE83LtdSMNd+6Y0xw==}
     dependencies:
@@ -8279,23 +8246,6 @@ packages:
         optional: true
     dependencies:
       '@storybook/core': 8.6.15(storybook@8.6.15)
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
-    dev: true
-
-  /storybook@8.6.15(prettier@3.8.1):
-    resolution: {integrity: sha512-Ob7DMlwWx8s7dMvcQ3xPc02TvUeralb+xX3oaPRk9wY9Hc6M1IBC/7cEoITkSmRS2v38DHubC+mtEKNc1u2gQg==}
-    hasBin: true
-    peerDependencies:
-      prettier: ^2 || ^3
-    peerDependenciesMeta:
-      prettier:
-        optional: true
-    dependencies:
-      '@storybook/core': 8.6.15(prettier@3.8.1)(storybook@8.6.15)
-      prettier: 3.8.1
     transitivePeerDependencies:
       - bufferutil
       - supports-color
