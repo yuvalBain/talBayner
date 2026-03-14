@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import { useEffect, type HTMLAttributes, type ReactNode, type FC } from "react";
+import { type FC, type HTMLAttributes, type ReactNode, useEffect } from "react";
 
 export type MobileDrawerData = {
   open: boolean;
