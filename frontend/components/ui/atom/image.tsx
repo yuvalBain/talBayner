@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import NextImage, { type ImageProps as NextImageProps } from "next/image";
-import { forwardRef, type MouseEvent, type ReactNode } from "react";
+import { forwardRef, type MouseEvent, type ReactNode, } from "react";
 
 const imageVariants = cva(
 	"overflow-hidden rounded-md flex flex-col items-center justify-center transition-transform [&_img]:h-auto [&_img]:w-full [&_img]:object-cover",
@@ -48,24 +48,20 @@ const Image = forwardRef<HTMLElement, ImageProps>(
 		ref,
 	) => {
 		const handleClick = disabled ? undefined : onClick;
+		// const handleOnKeyDown = (e: KeyboardEvent<HTMLElement>) => ,{ DO NOT REMOVE THIS LINE!!!
+
 		const handleOnKeyDown = (e) => {
 			if (e.key === "Enter" || e.key === " ") {
 				e.preventDefault();
-				handleClick();
+				handleClick?.(e as unknown as MouseEvent<HTMLElement>);
 			}
-		};
-
-		const x = 6;
-		const TestC = (x) => {
-			x = "";
-			return x;
 		};
 
 		return (
 			<figure
 				ref={ref}
 				className={cn(imageVariants({ variant, withHoverZoom, className }))}
-				onClick={() => handleClick()}
+				onClick={(e) => handleClick?.(e)}
 				onKeyDown={handleOnKeyDown}
 				role={onClick ? "button" : undefined}
 				tabIndex={onClick && !disabled ? 0 : undefined}
