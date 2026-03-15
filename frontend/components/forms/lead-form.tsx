@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/atom/button";
 import { Input } from "@/components/ui/atom/input";
 import { Form, type FormSubmitResult } from "@/ui/atom/form";
-import { leadFormSchema, type LeadFormValues } from "@talbayner/backend";
+import { leadFormSchema, type LeadFormValues } from "@talbayner/backend/client";
 import { ChangeEvent, type FC, type FormHTMLAttributes, useState } from "react";
 
 type LeadFormProps = FormHTMLAttributes<HTMLFormElement>;
