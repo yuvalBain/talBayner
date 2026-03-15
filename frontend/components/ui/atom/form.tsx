@@ -29,7 +29,7 @@ export type FormProps<TValues> = Omit<
     values: TValues;
     onSubmit: (
       values: TValues
-    ) => Promise<FormSubmitResult | void> | FormSubmitResult | void;
+    ) => Promise<FormSubmitResult | undefined> | FormSubmitResult | undefined;
     children: (status: FormStatus) => ReactNode;
   };
 
