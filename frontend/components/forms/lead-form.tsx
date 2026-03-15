@@ -4,13 +4,17 @@ import { Button } from "@/components/ui/atom/button";
 import { Input } from "@/components/ui/atom/input";
 import { Form, type FormSubmitResult } from "@/ui/atom/form";
 import { leadFormSchema, type LeadFormValues } from "@talbayner/backend";
-import { type FC, type FormHTMLAttributes, useState } from "react";
+import { ChangeEvent, type FC, type FormHTMLAttributes, useState } from "react";
 
 type LeadFormProps = FormHTMLAttributes<HTMLFormElement>;
 
 type FieldErrors = Partial<Record<keyof LeadFormValues, string>>;
 
-export const LeadForm: FC<LeadFormProps> = ({ className, ...props }) => {
+export const LeadForm: FC<LeadFormProps> = ({
+  className,
+  onSubmit: _onSubmit,
+  ...props
+}) => {
   const [values, setValues] = useState<LeadFormValues>({
     name: "",
     tel: "",
@@ -21,14 +25,20 @@ export const LeadForm: FC<LeadFormProps> = ({ className, ...props }) => {
 
   const handleChange =
     (field: keyof LeadFormValues) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       setValues((prev) => ({ ...prev, [field]: event.target.value }));
       setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
     };
 
-  const handleSubmit = async (
+
+
+  const handleSubmit:(values: {
+    name: string;
+    tel: string;
+    email: string;
+  }) => FormSubmitResult | Promise<FormSubmitResult> = async  (
     currentValues: LeadFormValues
-  ): Promise<FormSubmitResult> => {
+  ): Promise<FormSubmitResult>  => {
     const parsed = leadFormSchema.safeParse(currentValues);
 
     if (!parsed.success) {
@@ -43,7 +53,7 @@ export const LeadForm: FC<LeadFormProps> = ({ className, ...props }) => {
 
       setFieldErrors(nextErrors);
 
-      return { ok: false };
+      return { ok: false }
     }
 
     try {
