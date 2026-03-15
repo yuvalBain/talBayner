@@ -321,13 +321,11 @@
   --color-ring: var(--ring);
 }
 
-
 body {
   background: var(--comp-page-bg);
   color: var(--text-base-primary);
-  font-family: var(--font-geist-sans, var(--font-sans, ui-sans-serif, system-ui, sans-serif));
+    font-family: ui-sans-serif, system-ui, sans-serif;
 }
-
 
 @layer base {
   button:not(:disabled) {
