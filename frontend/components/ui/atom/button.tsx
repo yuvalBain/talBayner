@@ -1,9 +1,12 @@
 "use client";
 
+import { useDebounce } from "@/hooks/use-debounce";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { type ButtonHTMLAttributes, forwardRef } from "react";
+import { type ButtonHTMLAttributes, type MouseEvent, forwardRef } from "react";
+
+const DEFAULT_DEBOUNCE_DELAY_MS = 3000;
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -40,15 +43,41 @@ export interface ButtonProps
     ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  /** When true, uses default delay (3000ms). When a number, uses that many ms. Clicks are debounced (last click wins). */
+  debounce?: boolean | number;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, variant, size, asChild = false, type = "button", ...props },
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      type = "button",
+      debounce,
+      onClick: onClickProp,
+      ...props
+    },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
-    const onClick = props.disabled ? undefined : props.onClick;
+    const delayMs =
+      debounce === true
+        ? DEFAULT_DEBOUNCE_DELAY_MS
+        : typeof debounce === "number"
+          ? debounce
+          : DEFAULT_DEBOUNCE_DELAY_MS;
+    const debouncedRun = useDebounce({ delay: delayMs });
+
+    const onClick =
+      props.disabled
+        ? undefined
+        : debounce
+          ? (e: MouseEvent<HTMLButtonElement>) => {
+              debouncedRun({ callback: () => onClickProp?.(e) });
+            }
+          : onClickProp;
 
     return (
       <Comp

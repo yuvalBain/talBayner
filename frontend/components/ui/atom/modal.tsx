@@ -1,14 +1,18 @@
 "use client";
 
+import { Button, type ButtonProps } from "@/components/ui/atom/button";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import {
+	cloneElement,
 	forwardRef,
+	isValidElement,
 	useEffect,
 	useRef,
 	type DialogHTMLAttributes,
 	type MouseEvent,
 	type MutableRefObject,
+	type ReactElement,
 	type ReactNode,
 } from "react";
 
@@ -28,6 +32,8 @@ const modalVariants = cva(
 	},
 );
 
+export type ModalTriggerElement = ReactElement<ButtonProps>;
+
 export interface ModalProps
 	extends Omit<
 			DialogHTMLAttributes<HTMLDialogElement>,
@@ -36,9 +42,13 @@ export interface ModalProps
 		VariantProps<typeof modalVariants> {
 	isOpen: boolean;
 	onClose: () => void;
+	trigger?: ModalTriggerElement;
+	onOpen?: () => void;
 	children: ReactNode;
 	title?: string;
 }
+
+const DEFAULT_TRIGGER = <Button>click me</Button>;
 
 const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 	(
@@ -47,6 +57,8 @@ const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 			size,
 			isOpen,
 			onClose,
+			trigger,
+			onOpen,
 			children,
 			title,
 			...props
@@ -61,17 +73,20 @@ const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 			else if (ref) (ref as MutableRefObject<HTMLDialogElement | null>).current = el;
 		};
 
+		// Lock body scroll when dialog is open; clear when closed (even if dialog unmounts)
 		useEffect(() => {
-			const dialog = internalRef.current;
-			if (!dialog) return;
-
-			if (isOpen) {
-				dialog.showModal();
-				document.body.style.overflow = "hidden";
-			} else {
-				dialog.close();
+			if (isOpen) document.body.style.overflow = "hidden";
+			else document.body.style.overflow = "";
+			return () => {
 				document.body.style.overflow = "";
-			}
+			};
+		}, [isOpen]);
+
+		// When dialog mounts (isOpen true), show it
+		useEffect(() => {
+			if (!isOpen) return;
+			const dialog = internalRef.current;
+			if (dialog) dialog.showModal();
 		}, [isOpen]);
 
 		const handleBackdropClick = (e: MouseEvent<HTMLDialogElement>) => {
@@ -82,47 +97,70 @@ const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 			onClose();
 		};
 
+		const triggerElement =
+			onOpen != null
+				? (trigger ?? DEFAULT_TRIGGER)
+				: null;
+		const resolvedTrigger =
+			triggerElement != null && isValidElement(triggerElement)
+				? cloneElement(triggerElement as ReactElement<ButtonProps>, {
+						onClick: (e: MouseEvent<HTMLButtonElement>) => {
+							(triggerElement.props as ButtonProps).onClick?.(e);
+							onOpen?.();
+						},
+					})
+				: null;
+
 		return (
-			<dialog
-				ref={setRef}
-				onClose={onClose}
-				onClick={handleBackdropClick}
-				className={cn(modalVariants({ size, className }))}
-				aria-modal="true"
-				aria-labelledby={title ? "modal-title" : undefined}
-				{...props}
-			>
-				<div
-					data-modal-content
-					className="flex flex-col"
-					onClick={(e) => e.stopPropagation()}
-				>
-					<div className="flex items-center justify-between border-b border-base-subtle p-4">
-						{title ? (
-							<h2
-								id="modal-title"
-								className="text-lg font-semibold text-base-primary"
-							>
-								{title}
-							</h2>
-						) : (
-							<span className="flex-1" aria-hidden />
-						)}
-						<button
-							type="button"
-							onClick={handleCloseClick}
-							className="rounded-full p-1 text-base-secondary transition-colors hover:bg-base-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-							aria-label="סגור"
+			<>
+				{resolvedTrigger}
+
+				{isOpen && (
+					<dialog
+						ref={setRef}
+						onClose={onClose}
+						onClick={handleBackdropClick}
+						className={cn(modalVariants({ size, className }))}
+						aria-modal
+						aria-labelledby={title ? `modal of ${title}` : undefined}
+						{...props}
+					>
+						<div
+							data-modal-content
+							className="flex flex-col"
+							onClick={(e) => e.stopPropagation()}
 						>
-							<span aria-hidden>×</span>
-						</button>
-					</div>
-					<div className="p-4">{children}</div>
-				</div>
-			</dialog>
+							<div className="flex items-center justify-between border-b border-base-subtle p-4">
+								{title ? (
+									<h2
+										id="modal-title"
+										className="text-lg font-semibold text-base-primary"
+									>
+										{title}
+									</h2>
+								) : (
+									<span className="flex-1" aria-hidden />
+								)}
+								<button
+									type="button"
+									onClick={handleCloseClick}
+									className="rounded-full p-1 text-base-secondary transition-colors hover:bg-base-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+									aria-label="סגור"
+								>
+									<span aria-hidden>×</span>
+								</button>
+							</div>
+
+							<div className="p-4">{children}</div>
+
+						</div>
+					</dialog>
+				)}
+			</>
 		);
 	},
 );
+
 Modal.displayName = "Modal";
 
 export { Modal, modalVariants };

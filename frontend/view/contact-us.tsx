@@ -1,11 +1,16 @@
+"use client"
+
 import { LeadForm } from "@/components/forms/lead-form";
 import { cn } from "@/lib/cn";
-import { forwardRef, type HTMLAttributes } from "react";
+import { Modal } from "@/ui/atom/modal";
+import { useState , forwardRef, type HTMLAttributes } from "react";
 
 type ContactUsProps = HTMLAttributes<HTMLDivElement>;
 
 const ContactUs = forwardRef<HTMLDivElement, ContactUsProps>(
   ({ className, children, ...props }, ref) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
       <div>
         <div
@@ -15,7 +20,14 @@ const ContactUs = forwardRef<HTMLDivElement, ContactUsProps>(
         >
           <h1 className="text-3xl font-semibold text-foreground">צור קשר</h1>
 
-          <LeadForm />
+          <Modal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            onOpen={() => setIsOpen(true)}
+            title="צור קשר"
+          >
+            <LeadForm />
+          </Modal>
         </div>
       </div>
     );
