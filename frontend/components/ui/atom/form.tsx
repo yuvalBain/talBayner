@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/cn";
 import { cva, type VariantProps } from "class-variance-authority";
-import type { FormEvent, FormHTMLAttributes, ReactNode } from "react";
+import type { FormHTMLAttributes, ReactNode } from "react";
 import { type ForwardedRef, forwardRef, useState } from "react";
 
 const formVariants = cva("", {
@@ -33,15 +33,17 @@ export type FormProps<TValues> = Omit<
     children: (status: FormStatus) => ReactNode;
   };
 
-function InnerForm<TValues>(
+const InnerForm = <TValues,>(
   { className, values, onSubmit, children, ...props }: FormProps<TValues>,
   ref: ForwardedRef<HTMLFormElement>
-) {
+) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit: FormHTMLAttributes<HTMLFormElement>["onSubmit"] = async (
+    event
+  ) => {
+    event?.preventDefault();
     setStatusMessage(null);
     setIsSubmitting(true);
 
@@ -72,9 +74,9 @@ function InnerForm<TValues>(
       })}
     </form>
   );
-}
+};
 
-const Form = forwardRef(InnerForm) as <TValues>(
+const Form = forwardRef(InnerForm) as <TValues,>(
   props: FormProps<TValues> & { ref?: ForwardedRef<HTMLFormElement> }
 ) => ReactNode;
 
