@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
-		"target": "ES2024",
+		"target": "ESNext",
+		"lib": ["dom", "dom.iterable", "esnext"],
 		"module": "ESNext",
-		"strict": true,
 		"moduleResolution": "bundler",
+		"strict": true,
 		"noEmit": true,
 		"isolatedModules": true,
 		"resolveJsonModule": true,
@@ -16,5 +17,6 @@
 			"@frontend/*": ["frontend/*"]
 		}
 	},
+	"include": ["**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules", "dist"]
 }
