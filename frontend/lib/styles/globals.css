@@ -10,7 +10,7 @@
     --text-base-onColor: var(--white);
 
     --bg-base-primary: var(--white);
-    --bg-accent-primary: var(--color-indigo-400);
+    --bg-accent-primary: var(--teal-400);
 
     --surface-base-primary: var(--white);
     --text-base-primary: var(--gray-900);
@@ -101,7 +101,7 @@
     --surface-base-primary: var(--gray-900);
     --text-base-primary: var(--gray-50);
     --bg-base-secondary: var(--gray-600);
-    --bg-accent-primary: var(--color-indigo-500);
+    --bg-accent-primary: var(--teal-500);
 
     --surface-base-secondary: var(--gray-600);
     --text-base-secondary: var(--gray-400);
@@ -343,6 +343,6 @@ body {
     @apply cursor-pointer;
   }
   svg {
-    /*fill: currentColor;*/
+    fill: currentColor;
   }
 }

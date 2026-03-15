@@ -63,7 +63,7 @@ export default {
         base: {
           default: "var(--border-base-default)",
           subtle: "var(--border-base-subtle)",
-          accent: "var(var(--gray-600))",
+          accent: "var(--border-base-accent)",
         },
         baseInverse: {
           default: "var(--border-baseInverse-default)",
